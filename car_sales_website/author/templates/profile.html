@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div>
+    <a class="btn btn-primary rounded-0 mt-3" href="{% url 'author:edit_profile' %}">
+        Edit Your Profile</a>
+</div>
+<p class="text-center fw-bold fs-3">Order History</p>
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4  mt-2 mb-5">
+    {% for c in data %}
+    <div class="col">
+        <div class="card h-100 border-0 shadow py-3 ">
+            <img src="{{c.car.image.url}}" class="card-img-top" alt="...">
+            <div class="card-body">
+
+
+                <p class="card-title fw-bold">{{c.car.name}}</p>
+                <p class="fw-bold mt-2 text-danger">$ {{c.total_price}}</p>
+                <p>Quantity Purchased: {{c.quantity_purchased}}</p>
+                <p><span class="fw-medium">Brand :</span> {{c.car.brand.name}}</a></p>
+                <p class="card-text">{{c.car.description | truncatewords:10}}</p>
+                <a href="{% url 'car:car_details' c.car.id %}" class="btn btn-dark rounded-0">View
+                    Details</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+
+
+{% endblock %}
